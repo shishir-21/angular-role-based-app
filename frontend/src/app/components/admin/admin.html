@@ -1,1 +1,53 @@
-<p>admin works!</p>
+<div class="container">
+  <div class="admin-header">
+    <div class="user-info">
+      <h2>Admin Control Panel</h2>
+      <span class="role-badge danger-badge">System Administrator</span>
+    </div>
+    <div class="actions">
+      <button class="btn btn-secondary" routerLink="/dashboard">
+        Go to Dashboard
+      </button>
+      <button class="btn btn-primary" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="glass-card">
+    <h3 class="card-title">User Management</h3>
+    <p class="card-subtitle">List of all registered users in the database.</p>
+    
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="spinner-large"></div>
+      <p>Loading users...</p>
+    </div>
+
+    <div *ngIf="!isLoading && usersList.length > 0" class="table-container fade-in">
+      <table>
+        <thead>
+          <tr>
+            <th>System ID</th>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of usersList">
+            <td>#{{ u.id }}</td>
+            <td>{{ u.userId }}</td>
+            <td>{{ u.name }}</td>
+            <td>
+              <span class="role-badge" [class.danger-badge]="u.role === 'Admin'">
+                {{ u.role }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="!isLoading && usersList.length === 0" class="empty-state">
+      <p>No users found.</p>
+    </div>
+  </div>
+</div>
