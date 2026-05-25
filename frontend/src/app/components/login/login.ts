@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -20,7 +20,8 @@ export class Login {
     private fb: FormBuilder,
     private apiService: ApiService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
     this.loginForm = this.fb.group({
       userId: ['', Validators.required],
@@ -39,6 +40,7 @@ export class Login {
       next: (res) => {
         this.userService.setUser(res.user);
         this.isLoading = false;
+        this.cdr.markForCheck();
         if (res.user.role === 'Admin') {
           this.router.navigate(['/admin']);
         } else {
@@ -48,6 +50,7 @@ export class Login {
       error: (err) => {
         this.error = 'Invalid credentials or role';
         this.isLoading = false;
+        this.cdr.markForCheck();
       }
     });
   }

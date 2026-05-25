@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../services/user';
@@ -18,7 +18,8 @@ export class Dashboard implements OnInit {
   constructor(
     private userService: UserService,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -37,10 +38,12 @@ export class Dashboard implements OnInit {
       next: (data) => {
         this.records = data;
         this.isLoading = false;
+        this.cdr.markForCheck();
       },
       error: (err) => {
         console.error('Failed to fetch records', err);
         this.isLoading = false;
+        this.cdr.markForCheck();
       }
     });
   }
