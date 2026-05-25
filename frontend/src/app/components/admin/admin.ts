@@ -20,6 +20,7 @@ export class Admin implements OnInit {
   isEditing = false;
   editingUserId: string | null = null;
   isSaving = false;
+  showModal = false;
   
   successMessage = '';
   errorMessage = '';
@@ -95,6 +96,14 @@ export class Admin implements OnInit {
     }
   }
 
+  openAddUserModal() {
+    this.isEditing = false;
+    this.editingUserId = null;
+    this.userForm.reset({ role: 'General User' });
+    this.showModal = true;
+    this.cdr.markForCheck();
+  }
+
   editUser(userToEdit: any) {
     this.isEditing = true;
     this.editingUserId = userToEdit.id;
@@ -104,6 +113,7 @@ export class Admin implements OnInit {
       password: userToEdit.password,
       role: userToEdit.role
     });
+    this.showModal = true;
     this.cdr.markForCheck();
   }
 
@@ -128,6 +138,7 @@ export class Admin implements OnInit {
     this.isEditing = false;
     this.editingUserId = null;
     this.isSaving = false;
+    this.showModal = false;
     this.userForm.reset({ role: 'General User' });
     this.cdr.markForCheck();
   }
