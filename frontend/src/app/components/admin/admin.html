@@ -12,6 +12,51 @@
     </div>
   </div>
 
+  <!-- Toast Messages -->
+  <div class="toast-container">
+    <div *ngIf="successMessage" class="toast success-toast fade-in">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="toast error-toast fade-in">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+  <!-- Create / Update User Form -->
+  <div class="glass-card form-card">
+    <h3 class="card-title">{{ isEditing ? 'Update User' : 'Add New User' }}</h3>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmitUser()" class="crud-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" formControlName="name" placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label>User ID</label>
+          <input type="text" formControlName="userId" placeholder="general_user">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="text" formControlName="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label>Role</label>
+          <select formControlName="role">
+            <option value="General User">General User</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" *ngIf="isEditing" (click)="resetForm()">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid || isSaving">
+          {{ isSaving ? 'Saving...' : (isEditing ? 'Update User' : 'Add User') }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Users Table -->
   <div class="glass-card">
     <h3 class="card-title">User Management</h3>
     <p class="card-subtitle">List of all registered users in the database.</p>
@@ -25,21 +70,24 @@
       <table>
         <thead>
           <tr>
-            <th>System ID</th>
-            <th>User ID</th>
             <th>Name</th>
+            <th>User ID</th>
             <th>Role</th>
+            <th class="actions-col">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let u of usersList">
-            <td>#{{ u.id }}</td>
-            <td>{{ u.userId }}</td>
             <td>{{ u.name }}</td>
+            <td>{{ u.userId }}</td>
             <td>
               <span class="role-badge" [class.danger-badge]="u.role === 'Admin'">
                 {{ u.role }}
               </span>
+            </td>
+            <td class="actions-cell">
+              <button class="btn-small btn-edit" (click)="editUser(u)">Edit</button>
+              <button class="btn-small btn-danger" (click)="deleteUser(u.id)">Delete</button>
             </td>
           </tr>
         </tbody>
