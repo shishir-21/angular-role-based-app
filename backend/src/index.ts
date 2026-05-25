@@ -16,6 +16,11 @@ const readDB = () => {
   return JSON.parse(data);
 };
 
+// Helper to write DB
+const writeDB = (data: any) => {
+  fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), 'utf-8');
+};
+
 // Helper to simulate delay
 const simulateDelay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -67,7 +72,81 @@ app.get('/api/users', async (req, res) => {
   }
 
   const db = readDB();
-  res.json(db.users.map((u: any) => ({ id: u.id, userId: u.userId, role: u.role, name: u.name })));
+  res.json(db.users.map((u: any) => ({ id: u.id, userId: u.userId, role: u.role, name: u.name, password: u.password })));
+});
+
+// Create User (Admin only)
+app.post('/api/users', async (req, res) => {
+  const { role: adminRole, delay = 0 } = req.query;
+  const { name, userId, password, role } = req.body;
+  if (delay) await simulateDelay(parseInt(delay as string));
+
+  if (adminRole !== 'Admin') {
+    return res.status(403).json({ message: 'Forbidden' });
+  }
+
+  const db = readDB();
+  const newUser = {
+    id: Date.now().toString(),
+    userId,
+    name,
+    password,
+    role
+  };
+  
+  db.users.push(newUser);
+  writeDB(db);
+
+  res.json({ success: true, user: newUser });
+});
+
+// Update User (Admin only)
+app.put('/api/users/:id', async (req, res) => {
+  const { role: adminRole, delay = 0 } = req.query;
+  const { id } = req.params;
+  const { name, userId, password, role } = req.body;
+  
+  if (delay) await simulateDelay(parseInt(delay as string));
+
+  if (adminRole !== 'Admin') {
+    return res.status(403).json({ message: 'Forbidden' });
+  }
+
+  const db = readDB();
+  const userIndex = db.users.findIndex((u: any) => u.id === id);
+
+  if (userIndex === -1) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  db.users[userIndex] = { ...db.users[userIndex], name, userId, password, role };
+  writeDB(db);
+
+  res.json({ success: true, user: db.users[userIndex] });
+});
+
+// Delete User (Admin only)
+app.delete('/api/users/:id', async (req, res) => {
+  const { role: adminRole, delay = 0 } = req.query;
+  const { id } = req.params;
+  
+  if (delay) await simulateDelay(parseInt(delay as string));
+
+  if (adminRole !== 'Admin') {
+    return res.status(403).json({ message: 'Forbidden' });
+  }
+
+  const db = readDB();
+  const userIndex = db.users.findIndex((u: any) => u.id === id);
+
+  if (userIndex === -1) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  db.users.splice(userIndex, 1);
+  writeDB(db);
+
+  res.json({ success: true, message: 'User deleted successfully' });
 });
 
 app.listen(PORT, () => {
