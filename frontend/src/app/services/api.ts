@@ -24,4 +24,16 @@ export class ApiService {
   getUsers(role: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/users${this.delayParam}&role=${role}`);
   }
+
+  createUser(user: any, adminRole: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/users${this.delayParam}&role=${adminRole}`, user);
+  }
+
+  updateUser(id: string, user: any, adminRole: string): Observable<any> {
+    return this.http.put(`${this.baseUrl}/users/${id}${this.delayParam}&role=${adminRole}`, user);
+  }
+
+  deleteUser(id: string, adminRole: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/users/${id}${this.delayParam}&role=${adminRole}`);
+  }
 }
