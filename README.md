@@ -109,5 +109,15 @@ npm start
 | General User | Dashboard access with user-specific records |
 
 ### Test Credentials
-- **Admin**: `admin_user` / `password123`
-- **User**: `general_user` / `password123`
+
+## Admin Account
+
+- User ID: admin_user
+- Password: password123
+- Role: Admin
+
+## General User Account
+
+- User ID: general_user
+- Password: password123
+- Role: General User
