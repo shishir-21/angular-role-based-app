@@ -13,11 +13,33 @@
       "password": "password123",
       "role": "General User",
       "name": "John Doe"
+    },
+    {
+      "id": "1779829765034",
+      "userId": "shishir_13",
+      "name": "shishir",
+      "password": "shishir123",
+      "role": "General User"
     }
   ],
   "records": [
-    { "id": "101", "userId": "general_user", "title": "Record A", "data": "Some data for John" },
-    { "id": "102", "userId": "general_user", "title": "Record B", "data": "More data for John" },
-    { "id": "103", "userId": "admin_user", "title": "Admin Record 1", "data": "Admin secret data" }
+    {
+      "id": "101",
+      "userId": "general_user",
+      "title": "Record A",
+      "data": "Some data for John"
+    },
+    {
+      "id": "102",
+      "userId": "general_user",
+      "title": "Record B",
+      "data": "More data for John"
+    },
+    {
+      "id": "103",
+      "userId": "admin_user",
+      "title": "Admin Record 1",
+      "data": "Admin secret data"
+    }
   ]
 }

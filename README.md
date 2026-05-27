@@ -6,7 +6,7 @@ This project was developed as part of a Software Engineer Internship code challe
 
 ---
 
-# 🚀 Features
+#  Features
 
 - Role-based authentication system
 - Admin and General User access control
@@ -21,7 +21,7 @@ This project was developed as part of a Software Engineer Internship code challe
 
 ---
 
-# 🛠️ Tech Stack
+#  Tech Stack
 
 ## Frontend
 - Angular
@@ -41,7 +41,7 @@ This project was developed as part of a Software Engineer Internship code challe
 
 ---
 
-# 📂 Project Structure
+#  Project Structure
 
 ```bash
 angular-role-based-app/
@@ -64,10 +64,11 @@ angular-role-based-app/
 │
 ├── README.md
 └── .gitignore
+```
 
 ---
 
-# 📡 API Documentation
+#  API Documentation
 
 The Node.js backend serves several REST API endpoints. It includes a `delay` query parameter to simulate asynchronous processing.
 
@@ -80,7 +81,7 @@ The Node.js backend serves several REST API endpoints. It includes a `delay` que
 
 ---
 
-# 💻 Setup & Installation
+#  Setup & Installation
 
 You need two terminal windows to run this full-stack application locally.
 
@@ -99,6 +100,13 @@ npm install
 npm start
 ```
 *Note: The Angular frontend runs on `http://localhost:4200`.*
+
+#  Role-Based Access
+
+| Role | Permissions |
+|------|-------------|
+| Admin | Full CRUD access and dashboard access |
+| General User | Dashboard access with user-specific records |
 
 ### Test Credentials
 - **Admin**: `admin_user` / `password123`
