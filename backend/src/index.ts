@@ -118,7 +118,7 @@ app.put('/api/users/:id', async (req, res) => {
   }
 
   const db = readDB();
-  const userIndex = db.users.findIndex((u: any) => u.id === id);
+  const userIndex = db.users.findIndex((u: any) => String(u.id) === String(id));
 
   if (userIndex === -1) {
     return res.status(404).json({ message: 'User not found' });
@@ -142,7 +142,7 @@ app.delete('/api/users/:id', async (req, res) => {
   }
 
   const db = readDB();
-  const userIndex = db.users.findIndex((u: any) => u.id === id);
+  const userIndex = db.users.findIndex((u: any) => String(u.id) === String(id));
 
   if (userIndex === -1) {
     return res.status(404).json({ message: 'User not found' });
