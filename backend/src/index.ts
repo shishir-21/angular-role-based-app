@@ -148,7 +148,10 @@ app.delete('/api/users/:id', async (req, res) => {
 
   res.json({ success: true, message: 'User deleted successfully' });
 });
-
+// Root Route
+app.get('/', (req, res) => {
+  res.send('Backend API is running successfully');
+});
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
