@@ -6,7 +6,43 @@ This project was developed as part of a Software Engineer Internship code challe
 
 ---
 
-#  Features
+# Live Demo
+
+## Frontend (Vercel)
+https://angular-role-based-app-k8rq.vercel.app/login
+
+## Backend API (Render)
+https://angular-role-based-app.onrender.com
+
+---
+
+# Application Screenshots
+
+## Login Page
+
+![Login Page](./screenshots/login.png)
+
+---
+
+## Admin Dashboard
+
+![Admin Dashboard](./screenshots/admin-dashboard.png)
+
+---
+
+## Add User Modal
+
+![Add User Modal](./screenshots/add-user-modal.png)
+
+---
+
+## General User Dashboard
+
+![User Dashboard](./screenshots/user-dashboard.png)
+
+---
+
+# Features
 
 - Role-based authentication system
 - Admin and General User access control
@@ -16,12 +52,14 @@ This project was developed as part of a Software Engineer Internship code challe
 - Modern glassmorphism UI design
 - Reactive Angular forms and modular architecture
 - JSON-based mock database integration
-- Modular frontend and backend structure
+- REST API integration
+- Protected admin functionality
 - Responsive and professional dashboard UI
+- Modular frontend and backend structure
 
 ---
 
-#  Tech Stack
+# Tech Stack
 
 ## Frontend
 - Angular
@@ -36,14 +74,16 @@ This project was developed as part of a Software Engineer Internship code challe
 - TypeScript
 - Nodemon
 
+## Deployment
+- Vercel (Frontend Hosting)
+- Render (Backend API Hosting)
+
 ## Database
 - Local JSON File (`db.json`) used as a mock database
 
-> Note: This project uses a local JSON file as a mock database for demonstration purposes. Data persistence may reset on cloud redeployments or server restarts.
-
 ---
 
-#  Project Structure
+# Project Structure
 
 ```bash
 angular-role-based-app/
@@ -64,62 +104,222 @@ angular-role-based-app/
 │   ├── src/styles.scss
 │   └── package.json
 │
+├── screenshots/
+│   ├── login.png
+│   ├── admin-dashboard.png
+│   ├── add-user-modal.png
+│   └── user-dashboard.png
+│
 ├── README.md
 └── .gitignore
 ```
 
 ---
 
-#  API Documentation
+# API Documentation
 
-The Node.js backend serves several REST API endpoints. It includes a `delay` query parameter to simulate asynchronous processing.
+The backend exposes several REST API endpoints and supports asynchronous delay simulation using query parameters.
 
-- `POST /api/login`: Validates credentials and returns the user object.
-- `GET /api/records`: Fetches records filtered by `userId` and `role`.
-- `GET /api/users`: Returns all users (Requires `role=Admin`).
-- `POST /api/users`: Creates a new user (Requires `role=Admin`).
-- `PUT /api/users/:id`: Updates an existing user (Requires `role=Admin`).
-- `DELETE /api/users/:id`: Deletes a user (Requires `role=Admin`).
+## Authentication
+- `POST /api/login`
+  - Validates credentials and returns authenticated user details.
+
+## Records
+- `GET /api/records`
+  - Fetches records based on user access level.
+  - Supports delay simulation.
+
+## User Management (Admin Only)
+
+- `GET /api/users`
+  - Returns all registered users.
+
+- `POST /api/users`
+  - Creates a new user.
+
+- `PUT /api/users/:id`
+  - Updates an existing user.
+
+- `DELETE /api/users/:id`
+  - Deletes a user.
 
 ---
 
-#  Setup & Installation
+# Async API Simulation
+
+To demonstrate asynchronous API processing and loading states, the backend supports a delay parameter.
+
+Example:
+
+```bash
+/api/users?delay=1500
+```
+
+This intentionally delays the response to simulate real-world API latency.
+
+---
+
+# Setup & Installation
 
 You need two terminal windows to run this full-stack application locally.
 
-### 1. Start the Backend API (Terminal 1)
+---
+
+## 1. Start Backend API
+
 ```bash
 cd backend
 npm install
 npm start
 ```
-*Note: The backend runs on `http://localhost:3000` and uses `nodemon` for hot-reloading.*
 
-### 2. Start the Frontend (Terminal 2)
+Backend runs on:
+
+```bash
+http://localhost:3000
+```
+
+---
+
+## 2. Start Angular Frontend
+
 ```bash
 cd frontend
 npm install
 npm start
 ```
-*Note: The Angular frontend runs on `http://localhost:4200`.*
 
-#  Role-Based Access
+Frontend runs on:
+
+```bash
+http://localhost:4200
+```
+
+---
+
+# Role-Based Access
 
 | Role | Permissions |
 |------|-------------|
-| Admin | Full CRUD access and dashboard access |
+| Admin | Full CRUD access, user management, dashboard access |
 | General User | Dashboard access with user-specific records |
 
-### Test Credentials
+---
+
+# Test Credentials
 
 ## Admin Account
 
-- User ID: admin_user
-- Password: password123
-- Role: Admin
+```bash
+User ID: admin_user
+Password: password123
+Role: Admin
+```
+
+---
 
 ## General User Account
 
-- User ID: general_user
-- Password: password123
-- Role: General User
+```bash
+User ID: general_user
+Password: password123
+Role: General User
+```
+
+---
+
+# Database Behavior (Local vs Live Deployment)
+
+This project uses a lightweight JSON-based mock database (`db.json`) for demonstration purposes.
+
+---
+
+## Local Development
+
+When running locally:
+
+- newly added users
+- edited users
+- deleted users
+
+are permanently stored inside `db.json`.
+
+This works because the backend has direct filesystem access on the local machine.
+
+---
+
+## Live Deployment Behavior
+
+In the live deployed environment (Render), the backend runs on a temporary cloud instance.
+
+Because of this:
+
+- runtime changes to `db.json` may not persist permanently
+- newly created users can disappear after redeploy/restart
+- the cloud filesystem is ephemeral (temporary)
+
+This is expected behavior when using file-based storage in cloud hosting environments.
+
+---
+
+# Why JSON Database Was Used
+
+The assignment requirements allowed:
+
+- local storage
+- XML
+- MongoDB
+- AWS DynamoDB
+
+A JSON-based mock database was intentionally used to:
+
+- simplify project setup
+- focus on Angular architecture
+- demonstrate REST API integration
+- implement role-based access control
+- showcase asynchronous processing
+- create a clean modular full-stack application
+
+---
+
+# Future Improvements
+
+Possible production-grade upgrades:
+
+- MongoDB Atlas integration
+- AWS DynamoDB integration
+- JWT authentication
+- Password hashing using bcrypt
+- Persistent cloud database storage
+- Pagination and search
+- Role permissions middleware
+- Docker deployment
+
+---
+
+# Evaluation Highlights
+
+This project demonstrates:
+
+- Angular modular architecture
+- Reactive forms
+- Role-based authorization
+- REST API integration
+- Async handling and loading states
+- Full CRUD operations
+- Modern responsive UI design
+- Clean code organization
+- Cloud deployment workflow
+
+---
+
+# Author
+
+## Shishir Mahato
+
+B.Tech CSE (Data Science)
+
+### Tech Focus
+- Frontend: Angular + SCSS
+- Backend: Node.js + TypeScript
+- Deployment: Vercel + Render
