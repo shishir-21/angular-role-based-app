@@ -4,7 +4,12 @@ import fs from 'fs';
 import path from 'path';
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:4200',
+    'https://angular-role-based-app-k8rq.vercel.app'
+  ]
+}));
 app.use(express.json());
 
 const PORT = 3000;
