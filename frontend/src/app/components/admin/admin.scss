@@ -100,10 +100,16 @@
   margin-top: var(--spacing-md);
 }
 
-.form-row {
+.form-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--spacing-lg);
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .form-actions {
@@ -196,8 +202,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
   z-index: 2000;
   display: flex;
   align-items: center;
@@ -206,10 +212,66 @@
 
 .modal-content {
   width: 100%;
-  max-width: 500px;
+  max-width: 540px;
   margin: 0 20px;
-  background: var(--surface);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.45),
+    0 0 20px rgba(124,108,255,0.15);
+  animation: popup 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes popup {
+  from {
+    transform: translateY(20px) scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Staggered form field animation */
+.stagger-1 { animation: slideUp 0.4s ease forwards 0.1s; opacity: 0; }
+.stagger-2 { animation: slideUp 0.4s ease forwards 0.15s; opacity: 0; }
+.stagger-3 { animation: slideUp 0.4s ease forwards 0.2s; opacity: 0; }
+.stagger-4 { animation: slideUp 0.4s ease forwards 0.25s; opacity: 0; }
+
+@keyframes slideUp {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Role badge preview */
+.role-preview {
+  position: absolute;
+  right: 16px;
+  top: 18px;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  z-index: 2;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.3s ease;
+}
+
+.role-preview.admin {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.role-preview.user {
+  background: rgba(99, 102, 241, 0.2);
+  color: #818cf8;
+  border: 1px solid rgba(99, 102, 241, 0.3);
 }
 
 .modal-header {

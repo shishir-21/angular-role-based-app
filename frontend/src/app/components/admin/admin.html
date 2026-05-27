@@ -30,30 +30,42 @@
         <button class="close-btn" (click)="resetForm()">&times;</button>
       </div>
       <form [formGroup]="userForm" (ngSubmit)="onSubmitUser()" class="crud-form">
-        <div class="form-row">
-          <div class="form-group">
+        <div class="form-grid">
+          <div class="form-floating stagger-1">
+            <svg lucideUser class="input-icon"></svg>
+            <input type="text" class="form-control" formControlName="name" placeholder=" ">
             <label>Name</label>
-            <input type="text" class="form-control" formControlName="name" placeholder="John Doe">
           </div>
-          <div class="form-group">
+          
+          <div class="form-floating stagger-2">
+            <svg lucideFingerprint class="input-icon"></svg>
+            <input type="text" class="form-control" formControlName="userId" placeholder=" ">
             <label>User ID</label>
-            <input type="text" class="form-control" formControlName="userId" placeholder="general_user">
           </div>
-          <div class="form-group">
+          
+          <div class="form-floating stagger-3">
+            <svg lucideKeyRound class="input-icon"></svg>
+            <input type="text" class="form-control" formControlName="password" placeholder=" ">
             <label>Password</label>
-            <input type="text" class="form-control" formControlName="password" placeholder="Password">
           </div>
-          <div class="form-group">
-            <label>Role</label>
+          
+          <div class="form-floating stagger-4">
+            <svg lucideShieldCheck class="input-icon"></svg>
+            <span class="role-preview fade-in" 
+                  [ngClass]="userForm.get('role')?.value === 'Admin' ? 'admin' : 'user'">
+              {{ userForm.get('role')?.value }}
+            </span>
             <select class="form-control" formControlName="role">
               <option value="General User">General User</option>
               <option value="Admin">Admin</option>
             </select>
+            <label>Role</label>
           </div>
         </div>
-        <div class="form-actions">
+        <div class="form-actions stagger-4">
           <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancel</button>
           <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid || isSaving">
+            <div *ngIf="isSaving" class="spinner"></div>
             {{ isSaving ? 'Saving...' : (isEditing ? 'Update User' : 'Add User') }}
           </button>
         </div>

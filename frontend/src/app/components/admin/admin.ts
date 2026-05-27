@@ -4,10 +4,19 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../services/user';
 import { ApiService } from '../../services/api';
+import { LucideUser, LucideFingerprint, LucideKeyRound, LucideShieldCheck } from '@lucide/angular';
 
 @Component({
   selector: 'app-admin',
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [
+    CommonModule, 
+    RouterModule, 
+    ReactiveFormsModule, 
+    LucideUser, 
+    LucideFingerprint, 
+    LucideKeyRound, 
+    LucideShieldCheck
+  ],
   templateUrl: './admin.html',
   styleUrl: './admin.scss'
 })
