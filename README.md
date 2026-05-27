@@ -39,6 +39,8 @@ This project was developed as part of a Software Engineer Internship code challe
 ## Database
 - Local JSON File (`db.json`) used as a mock database
 
+> Note: This project uses a local JSON file as a mock database for demonstration purposes. Data persistence may reset on cloud redeployments or server restarts.
+
 ---
 
 #  Project Structure
