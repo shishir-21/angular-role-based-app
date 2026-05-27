@@ -65,3 +65,41 @@ angular-role-based-app/
 ├── README.md
 └── .gitignore
 
+---
+
+# 📡 API Documentation
+
+The Node.js backend serves several REST API endpoints. It includes a `delay` query parameter to simulate asynchronous processing.
+
+- `POST /api/login`: Validates credentials and returns the user object.
+- `GET /api/records`: Fetches records filtered by `userId` and `role`.
+- `GET /api/users`: Returns all users (Requires `role=Admin`).
+- `POST /api/users`: Creates a new user (Requires `role=Admin`).
+- `PUT /api/users/:id`: Updates an existing user (Requires `role=Admin`).
+- `DELETE /api/users/:id`: Deletes a user (Requires `role=Admin`).
+
+---
+
+# 💻 Setup & Installation
+
+You need two terminal windows to run this full-stack application locally.
+
+### 1. Start the Backend API (Terminal 1)
+```bash
+cd backend
+npm install
+npm start
+```
+*Note: The backend runs on `http://localhost:3000` and uses `nodemon` for hot-reloading.*
+
+### 2. Start the Frontend (Terminal 2)
+```bash
+cd frontend
+npm install
+npm start
+```
+*Note: The Angular frontend runs on `http://localhost:4200`.*
+
+### Test Credentials
+- **Admin**: `admin_user` / `password123`
+- **User**: `general_user` / `password123`
