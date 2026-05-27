@@ -44,10 +44,10 @@ https://angular-role-based-app.onrender.com
 
 # Features
 
-- Role-based authentication system
+- Role based authentication system
 - Admin and General User access control
 - Full CRUD user management
-- User-specific records dashboard
+- User specific records dashboard
 - Async API delay simulation with loading states
 - Modern glassmorphism UI design
 - Reactive Angular forms and modular architecture
@@ -271,7 +271,7 @@ The assignment requirements allowed:
 - MongoDB
 - AWS DynamoDB
 
-A JSON-based mock database was intentionally used to:
+A JSON based mock database was intentionally used to:
 
 - simplify project setup
 - focus on Angular architecture
@@ -284,7 +284,7 @@ A JSON-based mock database was intentionally used to:
 
 # Future Improvements
 
-Possible production-grade upgrades:
+Possible production grade upgrades:
 
 - MongoDB Atlas integration
 - AWS DynamoDB integration
@@ -303,7 +303,7 @@ This project demonstrates:
 
 - Angular modular architecture
 - Reactive forms
-- Role-based authorization
+- Role based authorization
 - REST API integration
 - Async handling and loading states
 - Full CRUD operations
